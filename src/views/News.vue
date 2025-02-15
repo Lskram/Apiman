@@ -46,7 +46,7 @@
     },
     methods: {
       async fetchNews() {
-        const apiKey = ""; // 🔥 API Key ของคุณ
+        const apiKey = import.meta.env.VITE_NEWS_TOKEN; // 🔥 API Key ของคุณ
         const apiUrl = `https://newsapi.org/v2/everything?q=weather OR storm OR flood OR climate OR typhoon OR tornado&language=en&pageSize=10&apiKey=${apiKey}`;
   
         try {

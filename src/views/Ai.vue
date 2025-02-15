@@ -47,7 +47,7 @@ export default {
       userInput: '',
       messages: [],
       isLoading: false,
-      API_TOKEN: '',
+      API_TOKEN: import.meta.env.VITE_HUGGING_FACE_TOKEN,
       // เปลี่ยนเป็นโมเดลที่เหมาะกับการแชทภาษาไทย
       API_URL: 'https://api-inference.huggingface.co/models/facebook/blenderbot-400M-distill'
     }
