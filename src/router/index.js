@@ -8,7 +8,7 @@ const routes = [
   { path: "/", component: Home },
   { path: "/weatherthailand", component: WeatherThailand },
   { path: "/news", component: News },
-  { path: "/chat-ai", component: Ai } // ✅ เพิ่ม AI Chat
+  { path: "/chat-ai", component: Ai },
 ];
 
 const router = createRouter({
