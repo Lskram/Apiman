@@ -1,15 +1,62 @@
 <template>
-    <div class="container home-container">
-      <div class="card shadow-lg p-4 text-center animate__animated animate__fadeIn" :class="darkMode ? 'dark-card' : 'light-card'">
-        <h1 class="mb-4 animate__animated animate__fadeInDown">🌍 ยินดีต้อนรับสู่ Apiman Weather</h1>
-        <p class="lead animate__animated animate__fadeInUp">ติดตามสภาพอากาศล่าสุดของประเทศไทย และข้อมูลข่าวสารที่สำคัญ</p>
-  
-        <router-link to="/weatherthailand" class="btn btn-primary btn-lg mt-3 animate__animated animate__pulse animate__infinite">
-          🔍 ตรวจสอบสภาพอากาศ
-        </router-link>
+  <div class="home-page">
+    <div class="container">
+      <div class="row g-4">
+        <!-- Weather Card -->
+        <div class="col-md-6">
+          <div class="card feature-card shadow-lg p-4 text-center animate__animated animate__fadeIn" 
+               :class="darkMode ? 'dark-card' : 'light-card'">
+            <div class="card-icon mb-3">🌦️</div>
+            <h2 class="card-title mb-3 animate__animated animate__fadeInDown">สภาพอากาศ</h2>
+            <p class="card-text mb-4 animate__animated animate__fadeInUp">ตรวจสอบสภาพอากาศล่าสุดในประเทศไทย พร้อมข้อมูลที่แม่นยำ</p>
+            <router-link to="/weatherthailand" class="btn btn-primary btn-lg animate__animated animate__pulse">
+              ตรวจสอบสภาพอากาศ
+            </router-link>
+          </div>
+        </div>
+
+        <!-- News Card -->
+        <div class="col-md-6">
+          <div class="card feature-card shadow-lg p-4 text-center animate__animated animate__fadeIn" 
+               :class="darkMode ? 'dark-card' : 'light-card'">
+            <div class="card-icon mb-3">📰</div>
+            <h2 class="card-title mb-3 animate__animated animate__fadeInDown">ข่าวสาร</h2>
+            <p class="card-text mb-4 animate__animated animate__fadeInUp">อัพเดทข่าวสารเกี่ยวกับสภาพอากาศและภัยธรรมชาติ</p>
+            <router-link to="/news" class="btn btn-primary btn-lg animate__animated animate__pulse">
+              อ่านข่าว
+            </router-link>
+          </div>
+        </div>
+
+        <!-- World Time Card -->
+        <div class="col-md-6">
+          <div class="card feature-card shadow-lg p-4 text-center animate__animated animate__fadeIn" 
+               :class="darkMode ? 'dark-card' : 'light-card'">
+            <div class="card-icon mb-3">🌐</div>
+            <h2 class="card-title mb-3 animate__animated animate__fadeInDown">เวลาทั่วโลก</h2>
+            <p class="card-text mb-4 animate__animated animate__fadeInUp">ดูเวลาในแต่ละประเทศทั่วโลกแบบเรียลไทม์</p>
+            <router-link to="/world-time" class="btn btn-primary btn-lg animate__animated animate__pulse">
+              ดูเวลา
+            </router-link>
+          </div>
+        </div>
+
+        <!-- AI Chat Card -->
+        <div class="col-md-6">
+          <div class="card feature-card shadow-lg p-4 text-center animate__animated animate__fadeIn" 
+               :class="darkMode ? 'dark-card' : 'light-card'">
+            <div class="card-icon mb-3">🤖</div>
+            <h2 class="card-title mb-3 animate__animated animate__fadeInDown">AI Chat</h2>
+            <p class="card-text mb-4 animate__animated animate__fadeInUp">สอบถามข้อมูลและพูดคุยกับ AI ผู้ช่วยของคุณ</p>
+            <router-link to="/chat-ai" class="btn btn-primary btn-lg animate__animated animate__pulse">
+              แชทกับ AI
+            </router-link>
+          </div>
+        </div>
       </div>
     </div>
-  </template>
+  </div>
+</template>
   
   <script>
   export default {
@@ -183,5 +230,95 @@
   .dark-card .btn-primary:hover {
     background: linear-gradient(135deg, #1976d2 0%, #1565c0 100%);
   }
+
+  .home-page {
+  min-height: 100vh;
+  padding: 3rem 0;
+  background: url("/weather.jpg") no-repeat center center fixed;
+  background-size: cover;
+  position: relative;
+}
+
+.home-page::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.2) 100%);
+  z-index: 1;
+}
+
+.container {
+  position: relative;
+  z-index: 2;
+}
+
+.feature-card {
+  height: 100%;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+}
+
+.card-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.card-title {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #1a237e;
+}
+
+.card-text {
+  font-size: 1.1rem;
+  color: #666;
+}
+
+.light-card {
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.dark-card {
+  background: rgba(23, 32, 42, 0.9);
+}
+
+.dark-card .card-title {
+  color: #fff;
+}
+
+.dark-card .card-text {
+  color: #ddd;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #1976d2 0%, #1565c0 100%);
+  border: none;
+  padding: 0.8rem 2rem;
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, #1565c0 0%, #0d47a1 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(21, 101, 192, 0.3);
+}
+
+@media (max-width: 768px) {
+  .home-page {
+    padding: 2rem 0;
+  }
+  
+  .feature-card {
+    margin-bottom: 1rem;
+  }
+}
   </style>
   

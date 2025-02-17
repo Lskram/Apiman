@@ -2,7 +2,7 @@
 <template>
   <div class="app">
     <!-- Glassmorphism Navbar -->
-    <nav class="navbar" :class="{'navbar-dark': darkMode}">
+    <nav class="navbar" :class="{ 'navbar-dark': darkMode }">
       <div class="nav-container">
         <!-- Brand -->
         <a class="navbar-brand" href="#">
@@ -16,17 +16,22 @@
             <span class="nav-icon">🏠</span>
             <span class="nav-text">Home</span>
           </router-link>
-          
+
           <router-link to="/weatherthailand" class="nav-item" active-class="active">
             <span class="nav-icon">🌤️</span>
             <span class="nav-text">Weather</span>
           </router-link>
-          
+
           <router-link to="/news" class="nav-item" active-class="active">
             <span class="nav-icon">📰</span>
             <span class="nav-text">News</span>
           </router-link>
-          
+
+          <router-link to="/world-time" class="nav-item" active-class="active">
+            <span class="nav-icon">🌐</span>
+            <span class="nav-text">World Time</span>
+          </router-link>
+
           <router-link to="/chat-ai" class="nav-item" active-class="active">
             <span class="nav-icon">🤖</span>
             <span class="nav-text">Chat AI</span>
@@ -34,11 +39,7 @@
         </div>
 
         <!-- Dark Mode Toggle -->
-        <button 
-          @click="toggleDarkMode" 
-          class="theme-toggle"
-          :class="{'theme-toggle-dark': darkMode}"
-        >
+        <button @click="toggleDarkMode" class="theme-toggle" :class="{ 'theme-toggle-dark': darkMode }">
           <span class="toggle-icon">{{ darkMode ? '🌞' : '🌙' }}</span>
           <span class="toggle-text">{{ darkMode ? 'Light' : 'Dark' }}</span>
         </button>
@@ -46,7 +47,7 @@
     </nav>
 
     <!-- Content Area with Smooth Transition -->
-    <main class="main-content" :class="{'dark-mode': darkMode}">
+    <main class="main-content" :class="{ 'dark-mode': darkMode }">
       <router-view v-slot="{ Component }">
         <transition name="fade" mode="out-in">
           <component :is="Component" />
@@ -72,11 +73,9 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(
-    135deg,
-    rgba(0, 0, 0, 0.2) 0%,
-    rgba(0, 0, 0, 0.3) 100%
-  );
+  background: linear-gradient(135deg,
+      rgba(0, 0, 0, 0.2) 0%,
+      rgba(0, 0, 0, 0.3) 100%);
   z-index: 1;
 }
 
@@ -218,9 +217,12 @@
 
 /* Animations */
 @keyframes float {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateY(0);
   }
+
   50% {
     transform: translateY(-5px);
   }

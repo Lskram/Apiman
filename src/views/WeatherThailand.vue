@@ -1,54 +1,92 @@
 <template>
   <div class="container mt-5">
-    <div class="card shadow-lg p-4 text-center animate__animated animate__fadeIn" :class="darkMode ? 'bg-dark text-white' : 'bg-light'">
-      <h1 class="mb-4 animate__animated animate__fadeInDown">🌤️ พยากรณ์อากาศประเทศไทย</h1>
+    <div class="card shadow-lg p-4 text-center" :class="darkMode ? 'bg-dark text-white' : 'bg-light'">
+      <h1 class="mb-4 animate__animated animate__fadeInDown">
+        <span class="weather-icon">🌤️</span> 
+        พยากรณ์อากาศประเทศไทย
+      </h1>
       
-      <!-- Input ค้นหาชื่อเมือง -->
-      <div class="input-group mb-3 position-relative">
-        <input 
-          v-model="searchQuery" 
-          class="form-control animate__animated animate__fadeIn"
-          placeholder="พิมพ์ชื่อเมือง เช่น เชียงใหม่, ขอนแก่น"
-          @input="fetchSuggestedCities"
-        />
-        <button class="btn btn-primary animate__animated animate__pulse animate__infinite" @click="fetchCoordinates">
-          🔍 ค้นหา
-        </button>
-        
-        <!-- แสดงตัวเลือกเมืองที่เกี่ยวข้อง -->
-        <transition-group name="fade">
-          <ul v-if="suggestedCities.length > 0" class="list-group position-absolute w-100">
-            <li 
-              v-for="(city, index) in suggestedCities" 
-              :key="index" 
-              class="list-group-item list-group-item-action animate__animated animate__fadeInLeft"
-              @click="selectCity(city)"
+      <!-- Search Section -->
+      <div class="search-section">
+        <div class="search-wrapper">
+          <div class="input-group">
+            <input 
+              v-model="searchQuery" 
+              class="form-control custom-input"
+              placeholder="พิมพ์ชื่อเมือง เช่น เชียงใหม่, ขอนแก่น"
+              @input="fetchSuggestedCities"
+              autocomplete="off"
+            />
+            <button 
+              class="btn btn-primary custom-button"
+              @click="fetchCoordinates"
+              :disabled="!searchQuery.trim()"
             >
-              {{ city.name }} ({{ city.country }})
-            </li>
-          </ul>
-        </transition-group>
-      </div>
+              <span class="search-icon">🔍</span>
+              <span class="search-text">ค้นหา</span>
+            </button>
+          </div>
 
-      <!-- แสดงข้อมูลสภาพอากาศ -->
-      <transition name="slide">
-        <div v-if="weather" class="mt-4">
-          <h2 class="fw-bold animate__animated animate__fadeInUp">📍 {{ weather.city }}, {{ weather.country }}</h2>
-          <div class="row">
-            <div class="col-md-6" v-for="(info, key) in weatherDetails" :key="key">
-              <div class="card shadow-sm p-3 mb-3 animate__animated animate__zoomIn" :class="darkMode ? 'bg-secondary text-white' : 'bg-light'">
-                <h5>{{ info.icon }} {{ info.label }}</h5>
-                <p class="display-5">{{ info.value }}</p>
+          <!-- Suggestions Dropdown -->
+          <div v-if="suggestedCities.length > 0" class="suggestions-dropdown">
+            <div class="suggestions-list">
+              <div 
+                v-for="(city, index) in suggestedCities" 
+                :key="index"
+                class="suggestion-item"
+                @click="selectCity(city)"
+              >
+                <div class="location-info">
+                  <span class="location-icon">📍</span>
+                  <span class="city-name">{{ city.name }}</span>
+                  <span class="country-name">{{ city.country }}</span>
+                </div>
               </div>
             </div>
           </div>
-          <p class="text-muted mt-3 animate__animated animate__fadeIn">🕒 อัปเดตล่าสุด: {{ weather.last_updated }}</p>
+        </div>
+      </div>
+
+      <!-- Weather Results -->
+      <transition name="fade">
+        <div v-if="weather" class="weather-results mt-4">
+          <div class="location-header">
+            <h2 class="city-title">
+              <span class="location-pin">📍</span>
+              {{ weather.city }}, {{ weather.country }}
+            </h2>
+          </div>
+          
+          <div class="weather-grid">
+            <div v-for="(info, key) in weatherDetails" 
+                 :key="key"
+                 class="weather-card"
+                 :class="darkMode ? 'dark' : 'light'"
+            >
+              <div class="card-content">
+                <div class="weather-info-icon">{{ info.icon }}</div>
+                <div class="info-details">
+                  <div class="info-label">{{ info.label }}</div>
+                  <div class="info-value">{{ info.value }}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="update-info">
+            <span class="time-icon">🕒</span>
+            <span class="update-text">อัปเดตล่าสุด: {{ weather.last_updated }}</span>
+          </div>
         </div>
       </transition>
 
+      <!-- Error Message -->
       <transition name="fade">
-        <div v-if="error" class="alert alert-danger mt-3 animate__animated animate__shakeX">
-          {{ error }}
+        <div v-if="error" class="error-message">
+          <div class="alert alert-danger">
+            <span class="error-icon">⚠️</span>
+            {{ error }}
+          </div>
         </div>
       </transition>
     </div>
@@ -399,5 +437,183 @@ h1 {
 
 .bg-dark .list-group::-webkit-scrollbar-thumb {
   background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Search Section Styles */
+.search-section {
+  max-width: 600px;
+  margin: 0 auto 2rem;
+}
+
+.search-wrapper {
+  position: relative;
+}
+
+.custom-input {
+  height: 3.5rem;
+  border-radius: 15px !important;
+  padding: 0 1.5rem;
+  font-size: 1.1rem;
+  border: 2px solid rgba(25, 118, 210, 0.1);
+  transition: all 0.3s ease;
+  background: rgba(255, 255, 255, 0.95);
+}
+
+.custom-button {
+  min-width: 120px;
+  border-radius: 12px !important;
+  margin-left: 0.5rem !important;
+  background: linear-gradient(135deg, #1976d2 0%, #1565c0 100%);
+  border: none;
+  height: 3.5rem;
+  font-weight: 500;
+}
+
+/* Suggestions Dropdown Styles */
+.suggestions-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  margin-top: 0.5rem;
+  z-index: 1000;
+  overflow: hidden;
+}
+
+.suggestions-list {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.suggestion-item {
+  padding: 1rem 1.2rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: left;
+}
+
+.suggestion-item:hover {
+  background: rgba(25, 118, 210, 0.1);
+}
+
+.location-info {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.city-name {
+  font-weight: 600;
+  color: #1976d2;
+}
+
+.country-name {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+/* Weather Results Styles */
+.weather-results {
+  padding: 2rem;
+  border-radius: 15px;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.weather-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.weather-card {
+  background: white;
+  border-radius: 15px;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.weather-card:hover {
+  transform: translateY(-5px);
+}
+
+.card-content {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.weather-info-icon {
+  font-size: 2.5rem;
+}
+
+.info-details {
+  text-align: left;
+}
+
+.info-label {
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 0.3rem;
+}
+
+.info-value {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #1976d2;
+}
+
+/* Dark Mode Styles */
+.dark .custom-input {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.dark .suggestions-dropdown {
+  background: #1a2634;
+}
+
+.dark .suggestion-item {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.dark .city-name {
+  color: #90caf9;
+}
+
+.dark .country-name {
+  color: #aaa;
+}
+
+.dark .suggestion-item:hover {
+  background: rgba(144, 202, 249, 0.1);
+}
+
+.dark .weather-card {
+  background: rgba(45, 55, 72, 0.9);
+}
+
+.dark .info-label {
+  color: #aaa;
+}
+
+.dark .info-value {
+  color: #90caf9;
+}
+
+/* Animations */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>
