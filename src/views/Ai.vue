@@ -3,7 +3,7 @@
   <div class="container chat-container">
     <div class="card shadow-lg p-4">
       <h1 class="mb-4 text-center">
-        <span class="robot-icon">🤖</span> AI Chat
+        <span class="robot-icon">🤖</span> AI Huggingface
       </h1>
       
       <div class="chat-messages" ref="messagesContainer">

@@ -1,56 +1,72 @@
 <template>
   <div class="home-page">
-    <div class="container">
-      <div class="row g-4">
+    <div class="container py-5">
+      <div class="row g-4 justify-content-center">
         <!-- Weather Card -->
-        <div class="col-md-6">
-          <div class="card feature-card shadow-lg p-4 text-center animate__animated animate__fadeIn" 
+        <div class="col-12 col-md-6 col-lg-6">
+          <div class="card feature-card h-100 shadow-lg p-4 text-center animate__animated animate__fadeIn" 
                :class="darkMode ? 'dark-card' : 'light-card'">
-            <div class="card-icon mb-3">🌦️</div>
-            <h2 class="card-title mb-3 animate__animated animate__fadeInDown">สภาพอากาศ</h2>
-            <p class="card-text mb-4 animate__animated animate__fadeInUp">ตรวจสอบสภาพอากาศล่าสุดในประเทศไทย พร้อมข้อมูลที่แม่นยำ</p>
-            <router-link to="/weatherthailand" class="btn btn-primary btn-lg animate__animated animate__pulse">
-              ตรวจสอบสภาพอากาศ
-            </router-link>
+            <div class="card-body">
+              <i class="bi bi-cloud-sun card-icon mb-3"></i>
+              <h2 class="card-title h3 mb-3 animate__animated animate__fadeInDown">🌤️ สภาพอากาศ</h2>
+              <p class="card-text mb-4 animate__animated animate__fadeInUp">
+                ตรวจสอบสภาพอากาศล่าสุดในประเทศไทย พร้อมข้อมูลที่แม่นยำ
+              </p>
+              <router-link to="/weatherthailand" class="btn btn-primary btn-lg animate__animated animate__pulse w-100">
+                <i class="bi bi-search me-2"></i>ตรวจสอบสภาพอากาศ
+              </router-link>
+            </div>
           </div>
         </div>
 
         <!-- News Card -->
-        <div class="col-md-6">
-          <div class="card feature-card shadow-lg p-4 text-center animate__animated animate__fadeIn" 
+        <div class="col-12 col-md-6 col-lg-6">
+          <div class="card feature-card h-100 shadow-lg p-4 text-center animate__animated animate__fadeIn" 
                :class="darkMode ? 'dark-card' : 'light-card'">
-            <div class="card-icon mb-3">📰</div>
-            <h2 class="card-title mb-3 animate__animated animate__fadeInDown">ข่าวสาร</h2>
-            <p class="card-text mb-4 animate__animated animate__fadeInUp">อัพเดทข่าวสารเกี่ยวกับสภาพอากาศและภัยธรรมชาติ</p>
-            <router-link to="/news" class="btn btn-primary btn-lg animate__animated animate__pulse">
-              อ่านข่าว
-            </router-link>
+            <div class="card-body">
+              <i class="bi bi-newspaper card-icon mb-3"></i>
+              <h2 class="card-title h3 mb-3 animate__animated animate__fadeInDown">📰 ข่าวสาร</h2>
+              <p class="card-text mb-4 animate__animated animate__fadeInUp">
+                อัพเดทข่าวสารเกี่ยวกับสภาพอากาศและภัยธรรมชาติ
+              </p>
+              <router-link to="/news" class="btn btn-primary btn-lg animate__animated animate__pulse w-100">
+                <i class="bi bi-book me-2"></i>อ่านข่าว
+              </router-link>
+            </div>
           </div>
         </div>
 
         <!-- World Time Card -->
-        <div class="col-md-6">
-          <div class="card feature-card shadow-lg p-4 text-center animate__animated animate__fadeIn" 
+        <div class="col-12 col-md-6 col-lg-6">
+          <div class="card feature-card h-100 shadow-lg p-4 text-center animate__animated animate__fadeIn" 
                :class="darkMode ? 'dark-card' : 'light-card'">
-            <div class="card-icon mb-3">🌐</div>
-            <h2 class="card-title mb-3 animate__animated animate__fadeInDown">เวลาทั่วโลก</h2>
-            <p class="card-text mb-4 animate__animated animate__fadeInUp">ดูเวลาในแต่ละประเทศทั่วโลกแบบเรียลไทม์</p>
-            <router-link to="/world-time" class="btn btn-primary btn-lg animate__animated animate__pulse">
-              ดูเวลา
-            </router-link>
+            <div class="card-body">
+              <i class="bi bi-globe card-icon mb-3"></i>
+              <h2 class="card-title h3 mb-3 animate__animated animate__fadeInDown">🌐 เวลาทั่วโลก</h2>
+              <p class="card-text mb-4 animate__animated animate__fadeInUp">
+                ดูเวลาในแต่ละประเทศทั่วโลกแบบเรียลไทม์
+              </p>
+              <router-link to="/world-time" class="btn btn-primary btn-lg animate__animated animate__pulse w-100">
+                <i class="bi bi-clock me-2"></i>ดูเวลา
+              </router-link>
+            </div>
           </div>
         </div>
 
         <!-- AI Chat Card -->
-        <div class="col-md-6">
-          <div class="card feature-card shadow-lg p-4 text-center animate__animated animate__fadeIn" 
+        <div class="col-12 col-md-6 col-lg-6">
+          <div class="card feature-card h-100 shadow-lg p-4 text-center animate__animated animate__fadeIn" 
                :class="darkMode ? 'dark-card' : 'light-card'">
-            <div class="card-icon mb-3">🤖</div>
-            <h2 class="card-title mb-3 animate__animated animate__fadeInDown">AI Chat</h2>
-            <p class="card-text mb-4 animate__animated animate__fadeInUp">สอบถามข้อมูลและพูดคุยกับ AI ผู้ช่วยของคุณ</p>
-            <router-link to="/chat-ai" class="btn btn-primary btn-lg animate__animated animate__pulse">
-              แชทกับ AI
-            </router-link>
+            <div class="card-body">
+              <i class="bi bi-robot card-icon mb-3"></i>
+              <h2 class="card-title h3 mb-3 animate__animated animate__fadeInDown">🤖 AI Chat</h2>
+              <p class="card-text mb-4 animate__animated animate__fadeInUp">
+                สอบถามข้อมูลและพูดคุยกับ AI ผู้ช่วยของคุณ
+              </p>
+              <router-link to="/chat-ai" class="btn btn-primary btn-lg animate__animated animate__pulse w-100">
+                <i class="bi bi-chat-dots me-2"></i>แชทกับ AI
+              </router-link>
+            </div>
           </div>
         </div>
       </div>

@@ -5,7 +5,7 @@
     <nav class="navbar" :class="{ 'navbar-dark': darkMode }">
       <div class="nav-container">
         <!-- Brand -->
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="#" to="/">
           <span class="brand-icon">🌍</span>
           <span class="brand-text">Apiman Weather</span>
         </a>
@@ -34,7 +34,12 @@
 
           <router-link to="/chat-ai" class="nav-item" active-class="active">
             <span class="nav-icon">🤖</span>
-            <span class="nav-text">Chat AI</span>
+            <span class="nav-text">AI Hug</span>
+          </router-link>
+
+          <router-link to="/chat-ai1" class="nav-item" active-class="active">
+            <span class="nav-icon">🤖</span>
+            <span class="nav-text">AI Cohere</span>
           </router-link>
         </div>
 
@@ -142,6 +147,9 @@
   display: flex;
   gap: 1rem;
   margin: 0 2rem;
+  align-items: center;
+  line-height: 1.2;
+  white-space: nowrap;
 }
 
 .nav-item {
