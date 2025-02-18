@@ -150,6 +150,7 @@
   align-items: center;
   line-height: 1.2;
   white-space: nowrap;
+  justify-content: space-between;
 }
 
 .nav-item {
@@ -161,6 +162,8 @@
   border-radius: 12px;
   transition: all 0.3s ease;
   font-weight: 500;
+  flex: 1;
+  justify-content: center;
 }
 
 .navbar-dark .nav-item {
