@@ -59,12 +59,28 @@
                :class="darkMode ? 'dark-card' : 'light-card'">
             <div class="card-body">
               <i class="bi bi-robot card-icon mb-3"></i>
-              <h2 class="card-title h3 mb-3 animate__animated animate__fadeInDown">🤖 AI Chat</h2>
+              <h2 class="card-title h3 mb-3 animate__animated animate__fadeInDown">🤖 Huggingface</h2>
               <p class="card-text mb-4 animate__animated animate__fadeInUp">
-                สอบถามข้อมูลและพูดคุยกับ AI ผู้ช่วยของคุณ
+                สอบถามข้อมูลและพูดคุยกับ AI Huggingface ผู้ช่วยของคุณ
               </p>
               <router-link to="/chat-ai" class="btn btn-primary btn-lg animate__animated animate__pulse w-100">
-                <i class="bi bi-chat-dots me-2"></i>แชทกับ AI
+                <i class="bi bi-chat-dots me-2"></i>แชทกับ Huggingface
+              </router-link>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 col-md-6 col-lg-6">
+          <div class="card feature-card h-100 shadow-lg p-4 text-center animate__animated animate__fadeIn" 
+               :class="darkMode ? 'dark-card' : 'light-card'">
+            <div class="card-body">
+              <i class="bi bi-robot card-icon mb-3"></i>
+              <h2 class="card-title h3 mb-3 animate__animated animate__fadeInDown">✨ Cohere</h2>
+              <p class="card-text mb-4 animate__animated animate__fadeInUp">
+                สอบถามข้อมูลและพูดคุยกับ AI Cohere ผู้ช่วยของคุณ
+              </p>
+              <router-link to="/chat-ai1" class="btn btn-primary btn-lg animate__animated animate__pulse w-100">
+                <i class="bi bi-chat-dots me-2"></i>แชทกับ Cohere
               </router-link>
             </div>
           </div>
