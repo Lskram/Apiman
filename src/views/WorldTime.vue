@@ -44,7 +44,7 @@
             <div class="card-location">
               {{ city.name }}, {{ city.country }}
             </div>
-            <div class="card-timezone">{{ city.timezone }}</div>
+            <div class="card-timezone">{{ getTimezoneDifference(city) }}</div>
           </div>
         </div>
       </div>
@@ -77,43 +77,37 @@ export default {
           id: 1,
           name: 'Bangkok',
           country: 'Thailand',
-          timezone: 'Asia/Bangkok',
-          offset: 7
+          timezone: 'Asia/Bangkok'
         },
         {
           id: 2,
           name: 'Tokyo',
           country: 'Japan',
-          timezone: 'Asia/Tokyo',
-          offset: 9
+          timezone: 'Asia/Tokyo'
         },
         {
           id: 3,
           name: 'London',
           country: 'UK',
-          timezone: 'Europe/London',
-          offset: 0
+          timezone: 'Europe/London'
         },
         {
           id: 4,
           name: 'New York',
           country: 'USA',
-          timezone: 'America/New_York',
-          offset: -5
+          timezone: 'America/New_York'
         },
         {
           id: 5,
           name: 'Paris',
           country: 'France',
-          timezone: 'Europe/Paris',
-          offset: 1
+          timezone: 'Europe/Paris'
         },
         {
           id: 6,
           name: 'Singapore',
           country: 'Singapore',
-          timezone: 'Asia/Singapore',
-          offset: 8
+          timezone: 'Asia/Singapore'
         }
       ],
       timeInterval: null
@@ -132,22 +126,12 @@ export default {
 
       try {
         const now = new Date()
-        const cityTime = new Date(now.getTime() + (this.selectedCity.offset * 3600000))
+        const options = { timeZone: this.selectedCity.timezone, hour: '2-digit', minute: '2-digit', second: '2-digit' }
+        const dateOptions = { timeZone: this.selectedCity.timezone, weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }
 
-        this.currentTime = cityTime.toLocaleTimeString('th-TH', {
-          hour: '2-digit',
-          minute: '2-digit',
-          second: '2-digit'
-        })
-
-        this.currentDate = cityTime.toLocaleDateString('th-TH', {
-          weekday: 'long',
-          year: 'numeric',
-          month: 'long',
-          day: 'numeric'
-        })
-
-        this.timezone = `(GMT${this.selectedCity.offset >= 0 ? '+' : ''}${this.selectedCity.offset}:00)`
+        this.currentTime = now.toLocaleTimeString('th-TH', options)
+        this.currentDate = now.toLocaleDateString('th-TH', dateOptions)
+        this.timezone = this.getTimezoneDifference(this.selectedCity)
       } catch (error) {
         console.error('Error updating time:', error)
         this.error = 'Error updating time'
@@ -156,21 +140,21 @@ export default {
 
     getCityTime(city) {
       const now = new Date()
-      const cityTime = new Date(now.getTime() + (city.offset * 3600000))
-      return cityTime.toLocaleTimeString('th-TH', {
-        hour: '2-digit',
-        minute: '2-digit'
-      })
+      const options = { timeZone: city.timezone, hour: '2-digit', minute: '2-digit' }
+      return now.toLocaleTimeString('th-TH', options)
     },
 
     getCityDate(city) {
       const now = new Date()
-      const cityTime = new Date(now.getTime() + (city.offset * 3600000))
-      return cityTime.toLocaleDateString('th-TH', {
-        weekday: 'short',
-        month: 'short',
-        day: 'numeric'
-      })
+      const options = { timeZone: city.timezone, weekday: 'short', month: 'short', day: 'numeric' }
+      return now.toLocaleDateString('th-TH', options)
+    },
+
+    getTimezoneDifference(city) {
+      const bangkokTime = new Date().toLocaleString('en-US', { timeZone: 'Asia/Bangkok' })
+      const cityTime = new Date().toLocaleString('en-US', { timeZone: city.timezone })
+      const diff = (new Date(cityTime) - new Date(bangkokTime)) / 3600000
+      return `(GMT${diff >= 0 ? '+' : ''}${diff}:00)`
     },
 
     handleCityChange() {
