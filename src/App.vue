@@ -5,7 +5,7 @@
     <nav class="navbar" :class="{ 'navbar-dark': darkMode }">
       <div class="nav-container">
         <!-- Brand -->
-        <a class="navbar-brand" href="#" to="/">
+        <a class="navbar-brand" href="/" to="/">
           <span class="brand-icon">🌍</span>
           <span class="brand-text">Apiman Weather</span>
         </a>
